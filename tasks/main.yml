@@ -1,0 +1,26 @@
+---
+- name: Check if Shellcheck is installed
+  shell: command -v shellcheck >/dev/null 2>&1
+  register: shellcheck_installed
+  changed_when: shellcheck_installed.rc != 0
+  failed_when: false
+- name: Download Shellcheck
+  get_url:
+    url: https://storage.googleapis.com/shellcheck/shellcheck-stable.linux.x86_64.tar.xz
+    dest: /tmp/shellcheck-stable.linux.x86_64.tar.xz
+    mode: 0644
+  when: shellcheck_installed is changed
+- name: Unarchive Shellcheck
+  unarchive:
+    src: /tmp/shellcheck-stable.linux.x86_64.tar.xz
+    dest: /tmp
+    extra_opts:
+    - --xz
+  when: shellcheck_installed is changed
+- name: Install Shellcheck
+  copy:
+    src: /tmp/shellcheck-stable/shellcheck
+    dest: /usr/local/bin/shellcheck
+    remote_src: yes
+    mode: 0755
+  when: shellcheck_installed is changed
