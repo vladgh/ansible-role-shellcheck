@@ -1,0 +1,5 @@
+---
+galaxy_info:
+  role_name: shellcheck
+  author: Vlad Ghinea
+  license: Apache v2
