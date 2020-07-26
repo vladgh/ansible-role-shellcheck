@@ -9,7 +9,7 @@
 
 - name: Download Shellcheck
   get_url:
-    url: "https://storage.googleapis.com/shellcheck/shellcheck-{{ shellcheck_version }}.linux.x86_64.tar.xz"
+    url: "https://github.com/koalaman/shellcheck/releases/download/{{ shellcheck_version }}/shellcheck-{{ shellcheck_version }}.linux.x86_64.tar.xz"
     dest: "/tmp/shellcheck-{{ shellcheck_version }}.linux.x86_64.tar.xz"
     mode: '0644'
   when: shellcheck_installed is changed
