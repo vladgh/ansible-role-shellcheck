@@ -12,7 +12,7 @@
     url: "https://github.com/koalaman/shellcheck/releases/download/{{ shellcheck_version }}/shellcheck-{{ shellcheck_version }}.linux.x86_64.tar.xz"
     dest: "/tmp/shellcheck-{{ shellcheck_version }}.linux.x86_64.tar.xz"
     mode: '0644'
-  when: shellcheck_installed is changed
+  when: shellcheck_installed is changed  # noqa no-handler
 
 - name: Unarchive Shellcheck
   unarchive:
@@ -21,7 +21,7 @@
     extra_opts:
       - --xz
     remote_src: yes
-  when: shellcheck_installed is changed
+  when: shellcheck_installed is changed  # noqa no-handler
 
 - name: Install Shellcheck
   copy:
@@ -29,4 +29,4 @@
     dest: /usr/local/bin/shellcheck
     remote_src: yes
     mode: '0755'
-  when: shellcheck_installed is changed
+  when: shellcheck_installed is changed  # noqa no-handler
